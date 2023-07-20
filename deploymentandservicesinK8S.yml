@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodeapp
-        image: jamallasomasekhar/financeimg01:latest
+        image: docker push jamallasomasekhar/website:latest
         ports:
         - containerPort: 3000
         

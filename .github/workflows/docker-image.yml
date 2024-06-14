@@ -29,9 +29,13 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: SSH into Ubuntu Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@13.233.197.93 "echo Connected to Ubuntu server."
+
 
       - name: Pull Docker image from Docker Hub
-        run: docker pull jamallasomasekhar/website:latest
+        run: ssh -o StrictHostKeyChecking=no ubuntu@13.233.197.93 "docker pull jamallasomasekhar/website:latest"
 
       - name: Run Docker container
-        run: docker run -d -p 3000:3000 jamallasomasekhar/website:latest
+        run: ssh -o StrictHostKeyChecking=no ubuntu@13.233.197.93 "docker run -d -p 3000:3000 jamallasomasekhar/website:latest"

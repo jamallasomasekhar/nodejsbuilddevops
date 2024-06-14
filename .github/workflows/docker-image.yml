@@ -25,3 +25,14 @@ jobs:
 
       - name: Push Docker image
         run: docker push jamallasomasekhar/website:latest
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Pull Docker image from Docker Hub
+        run: docker pull jamallasomasekhar/website:latest
+
+      - name: Run Docker container
+        run: docker run -p 3000:3000 jamallasomasekhar/website:latest
+        detach: true
